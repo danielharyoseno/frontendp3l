@@ -53,6 +53,16 @@ const routes = [
         name: "jadwalumum.edit",
         component: () => import("@/views/JadwalUmum/updatePage.vue"),
       },
+      {
+        path: "/jadwalharian",
+        name: "jadwalharian.index",
+        component: () => import("@/views/JadwalHarian/indexPage.vue"),
+      },
+      {
+        path: "/transaksieposituang",
+        name: "deposit.create",
+        component: () => import("@/views/TransaksiDeposit/createPage.vue"),
+      },
     ],
   },
 ];

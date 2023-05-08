@@ -38,6 +38,16 @@
                 >Jadwal Umum</router-link
               >
             </li>
+            <li class="nav-item">
+              <router-link :to="{ name: 'jadwalharian.index' }" class="nav-link"
+                >Jadwal Harian</router-link
+              >
+            </li>
+            <li class="nav-item">
+              <router-link :to="{ name: 'deposit.create' }" class="nav-link"
+                >Transaksi Deposit Uang</router-link
+              >
+            </li>
           </ul>
         </div>
       </nav>
