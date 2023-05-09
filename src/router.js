@@ -63,6 +63,11 @@ const routes = [
         name: "deposit.create",
         component: () => import("@/views/TransaksiDeposit/createPage.vue"),
       },
+      {
+        path: "/transaksiaktivasi",
+        name: "aktivasi.create",
+        component: () => import("@/views/TransaksiAktivasi/createPage.vue"),
+      },
     ],
   },
 ];

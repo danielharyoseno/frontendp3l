@@ -128,45 +128,6 @@
                   {{ validation.password_member[0] }}
                 </div>
               </div>
-
-              <div class="form-group mb-3">
-                <label for="content" class="form-label"
-                  >Saldo Deposit Member</label
-                >
-                <input
-                  class="form-control"
-                  type="number"
-                  v-model="member.saldo_deposit_member"
-                  placeholder="Saldo Deposit Member"
-                />
-                <!-- validation -->
-                <div
-                  v-if="validation.saldo_deposit_member"
-                  class="mt-2 alert alert-danger"
-                >
-                  {{ validation.saldo_deposit_member[0] }}
-                </div>
-              </div>
-
-              <div class="form-group mb-3">
-                <label for="content" class="form-label"
-                  >Masa Berlaku Member</label
-                >
-                <input
-                  class="form-control"
-                  type="date"
-                  datepicker
-                  v-model="member.masa_berlaku_member"
-                  placeholder="Masa Berlaku Member"
-                />
-                <!-- validation -->
-                <div
-                  v-if="validation.masa_berlaku_member"
-                  class="mt-2 alert alert-danger"
-                >
-                  {{ validation.masa_berlaku_member[0] }}
-                </div>
-              </div>
               <button type="submit" class="btn btn-primary">SIMPAN</button>
             </form>
           </div>
@@ -192,8 +153,6 @@ export default {
       notel_member: "",
       username_member: "",
       password_member: "",
-      saldo_deposit_member: "",
-      masa_berlaku_member: "",
     });
     //state validation
     const validation = ref([]);
@@ -208,8 +167,6 @@ export default {
       let notel_member = member.notel_member;
       let username_member = member.username_member;
       let password_member = member.password_member;
-      let saldo_deposit_member = member.saldo_deposit_member;
-      let masa_berlaku_member = member.masa_berlaku_member;
       axios
         .post("http://localhost:8000/api/member", {
           nama_member: nama_member,
@@ -219,8 +176,6 @@ export default {
           notel_member: notel_member,
           username_member: username_member,
           password_member: password_member,
-          saldo_deposit_member: saldo_deposit_member,
-          masa_berlaku_member: masa_berlaku_member,
         })
         .then(() => {
           //redirect ke post index

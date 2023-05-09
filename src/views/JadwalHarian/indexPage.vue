@@ -60,12 +60,14 @@
 <script>
 import axios from "axios";
 import { onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
 export default {
   setup() {
     //reactive state
     let umums = ref([]);
     let harians = ref([]);
     let instrukturs = ref([]);
+    const router = useRouter();
     //mounted
     onMounted(() => {
       //get API from Laravel Backend
@@ -84,6 +86,9 @@ export default {
         .then((response) => {
           //assign state posts with response data
           harians.value = response.data.data;
+          router.push({
+            name: "jadwalharian.index",
+          });
         })
         .catch((error) => {
           console.log(error.response.data);
@@ -127,6 +132,7 @@ export default {
       harians,
       instrukturs,
       umums,
+      router,
       generateJadwal,
       harianUpdate,
     };

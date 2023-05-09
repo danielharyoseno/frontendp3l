@@ -48,6 +48,11 @@
                 >Transaksi Deposit Uang</router-link
               >
             </li>
+            <li class="nav-item">
+              <router-link :to="{ name: 'aktivasi.create' }" class="nav-link"
+                >Transaksi Aktivasi Member</router-link
+              >
+            </li>
           </ul>
         </div>
       </nav>

@@ -24,7 +24,6 @@
                   <th scope="col">Email</th>
                   <th scope="col">Nomor Telephone</th>
                   <th scope="col">Username</th>
-                  <th scope="col">Password</th>
                   <th scope="col">Saldo Deposit</th>
                   <th scope="col">Masa Berlaku</th>
                   <th scope="col">Aksi</th>
@@ -39,7 +38,6 @@
                   <td>{{ member.email_member }}</td>
                   <td>{{ member.notel_member }}</td>
                   <td>{{ member.username_member }}</td>
-                  <td>{{ member.password_member }}</td>
                   <td>{{ member.saldo_deposit_member }}</td>
                   <td>{{ member.masa_berlaku_member }}</td>
                   <td class="text-center">
