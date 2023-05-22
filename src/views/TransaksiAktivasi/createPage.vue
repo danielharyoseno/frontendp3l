@@ -109,7 +109,7 @@
 <script>
 import { onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
-// import { jsPDF } from "jspdf";
+import { jsPDF } from "jspdf";
 import axios from "axios";
 export default {
   setup() {
@@ -161,6 +161,7 @@ export default {
           id_pegawai: id_pegawai,
         })
         .then(() => {
+          cetakStrukAktivasi();
           router.push({
             name: "member.index",
           });
@@ -170,33 +171,34 @@ export default {
           validation.value = error.response.data;
         });
     }
-    // function cetakStrukAktivasi() {
-    //   console.log("cetak struk");
-    //   let elementPrint = document.querySelector("#printtarget");
-    //   elementPrint.style.display = "block";
-    //   elementPrint.style.fontSize = "5px";
 
-    //   //Spasi
-    //   elementPrint.style.lineHeight = "1.2";
-    //   elementPrint.style.margin = "0";
-    //   elementPrint.style.padding = "0";
+    function cetakStrukAktivasi() {
+      console.log("cetak struk");
+      let elementPrint = document.querySelector("#printtarget");
+      elementPrint.style.display = "block";
+      elementPrint.style.fontSize = "5px";
 
-    //   let doc = new jsPDF({
-    //     orientation: "l", // orientasi landscape
-    //     unit: "mm", // satuan millimeter
-    //     format: ["500", "200"], // ukuran kertas A4
-    //   });
+      //Spasi
+      elementPrint.style.lineHeight = "1.2";
+      elementPrint.style.margin = "0";
+      elementPrint.style.padding = "0";
 
-    //   doc.html(elementPrint, {
-    //     callback: function (doc) {
-    //       doc.save("struk.pdf");
-    //       elementPrint.style.display = "none";
-    //     },
-    //     x: 10,
-    //     y: 10,
-    //   });
-    //   console.log("akhir dari cetak pdf");
-    // }
+      let doc = new jsPDF({
+        orientation: "l", // orientasi landscape
+        unit: "mm", // satuan millimeter
+        format: ["500", "200"], // ukuran kertas A4
+      });
+
+      doc.html(elementPrint, {
+        callback: function (doc) {
+          doc.save("struk.pdf");
+          elementPrint.style.display = "none";
+        },
+        x: 10,
+        y: 10,
+      });
+      console.log("akhir dari cetak pdf");
+    }
 
     //return
     return {
@@ -204,7 +206,7 @@ export default {
       validation,
       router,
       store,
-      // cetakStrukAktivasi,
+      cetakStrukAktivasi,
       members,
       pegawais,
     };
