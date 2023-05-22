@@ -53,6 +53,16 @@
                 >Transaksi Aktivasi Member</router-link
               >
             </li>
+            <li class="nav-item">
+              <router-link :to="{ name: 'ijin.index' }" class="nav-link"
+                >Ijin Instruktur</router-link
+              >
+            </li>
+            <li class="nav-item">
+              <router-link :to="{ name: 'BookingGym.index' }" class="nav-link"
+                >Booking Gym</router-link
+              >
+            </li>
           </ul>
         </div>
       </nav>

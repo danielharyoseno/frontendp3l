@@ -3,6 +3,40 @@
     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
   >
     <h1 class="h2">Dashboard Kasir</h1>
+    <div>
+      <div
+        class="btn-group"
+        role="group"
+        aria-label="Basic radio toggle button group"
+      >
+        <input
+          @click="Deaktivasi()"
+          :disabled="buttonClicked"
+          type="radio"
+          class="btn-check"
+          name="btnradio"
+          id="btnradio1"
+          autocomplete="off"
+          checked
+        />
+        <label class="btn btn-outline-primary" for="btnradio1"
+          >Deaktivasi Member</label
+        >
+
+        <input
+          @click="ResetInst()"
+          :disabled="button1Clicked"
+          type="radio"
+          class="btn-check"
+          name="btnradio"
+          id="btnradio2"
+          autocomplete="off"
+        />
+        <label class="btn btn-outline-primary" for="btnradio2"
+          >Reset Instruktur</label
+        >
+      </div>
+    </div>
   </div>
   <div class="container mt-5">
     <div class="row">
@@ -26,6 +60,7 @@
                   <th scope="col">Username</th>
                   <th scope="col">Saldo Deposit</th>
                   <th scope="col">Masa Berlaku</th>
+                  <th scope="col">Status Membership</th>
                   <th scope="col">Aksi</th>
                 </tr>
               </thead>
@@ -40,6 +75,7 @@
                   <td>{{ member.username_member }}</td>
                   <td>{{ member.saldo_deposit_member }}</td>
                   <td>{{ member.masa_berlaku_member }}</td>
+                  <td>{{ member.status_membership }}</td>
                   <td class="text-center">
                     <router-link
                       :to="{
@@ -59,6 +95,7 @@
                       </button>
                     </div>
                   </td>
+                  <td class="text-center"></td>
                 </tr>
               </tbody>
             </table>
@@ -70,11 +107,13 @@
 </template>
 <script>
 import axios from "axios";
+import { useRouter } from "vue-router";
 import { onMounted, ref } from "vue";
 export default {
-  setup() {
+  data() {
     //reactive state
     let members = ref([]);
+    const router = useRouter();
     //mounted
     onMounted(() => {
       //get API from Laravel Backend
@@ -87,6 +126,20 @@ export default {
         .catch((error) => {
           console.log(error.response.data);
         });
+
+      //member
+
+      const clickMember = localStorage.getItem("buttonClicked");
+      if (clickMember) {
+        this.buttonClicked = JSON.parse(clickMember);
+      }
+
+      //instruktur
+
+      const clickInstruktur = localStorage.getItem("button1Clicked");
+      if (clickInstruktur) {
+        this.button1Clicked = JSON.parse(clickInstruktur);
+      }
     });
 
     function memberDelete(id) {
@@ -100,10 +153,44 @@ export default {
           console.log(error);
         });
     }
-    //return
+
+    function Deaktivasi() {
+      if (!this.buttonClicked) {
+        router.push({
+          name: "member.expired",
+        });
+        this.buttonClicked = false; //false / true
+        localStorage.setItem(
+          "buttonClicked",
+          JSON.stringify(this.buttonClicked)
+        );
+      }
+    }
+    function ResetInst() {
+      if (!this.button1Clicked) {
+        axios
+          .get(`http://localhost:8000/api/resetInstruktur`)
+          .then((response) => {
+            alert(response.data.message);
+            router.push({
+              name: "member.index",
+            });
+          });
+        this.button1Clicked = true; //false / true
+        localStorage.setItem(
+          "button1Clicked",
+          JSON.stringify(this.button1Clicked)
+        );
+      }
+    }
     return {
+      router,
       members,
       memberDelete,
+      Deaktivasi,
+      ResetInst,
+      buttonClicked: false,
+      button1Clicked: false,
     };
   },
 };

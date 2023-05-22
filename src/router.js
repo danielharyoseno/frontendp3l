@@ -14,6 +14,11 @@ const routes = [
         component: () => import("@/views/Instruktur/indexPage.vue"),
       },
       {
+        path: "/ijinInstruktur",
+        name: "ijin.index",
+        component: () => import("@/views/Instruktur/ijinPage.vue"),
+      },
+      {
         path: "/instruktur/create",
         name: "instruktur.create",
         component: () => import("@/views/Instruktur/createPage.vue"),
@@ -37,6 +42,16 @@ const routes = [
         path: "/member/create",
         name: "member.edit",
         component: () => import("@/views/Member/updatePage.vue"),
+      },
+      {
+        path: "/member/reset",
+        name: "inst.reset",
+        component: () => import("@/views/Member/resetPage.vue"),
+      },
+      {
+        path: "/member/expired",
+        name: "member.expired",
+        component: () => import("@/views/Member/expiredPage.vue"),
       },
       {
         path: "/jadwalumum",
@@ -67,6 +82,11 @@ const routes = [
         path: "/transaksiaktivasi",
         name: "aktivasi.create",
         component: () => import("@/views/TransaksiAktivasi/createPage.vue"),
+      },
+      {
+        path: "/bookingGym",
+        name: "BookingGym.index",
+        component: () => import("@/views/Gym/indexPage.vue"),
       },
     ],
   },
