@@ -3,6 +3,20 @@
     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
   >
     <h1 class="h2">Dashboard Manager Operasional</h1>
+    <div>
+      <button
+        @click.prevent="printGym(gyms)"
+        class="btn btn-md btn-success mb-5"
+      >
+        Laporan Gym Bulanan
+      </button>
+      <button
+        @click.prevent="printKelas(kelast)"
+        class="btn btn-md btn-success mb-5"
+      >
+        Laporan Kelas Bulanan
+      </button>
+    </div>
   </div>
   <div class="container mt-5">
     <div class="row">
@@ -67,6 +81,12 @@ export default {
     let umums = ref([]);
     let kelast = ref([]);
     let instrukturs = ref([]);
+    let kelas = ref([]);
+    let gyms = ref([]);
+
+    // function totalGym() {
+    //   this.totalGym = this.gyms.reduce((total, row) => total + row.count, 0);
+    // }
     //mounted
     onMounted(() => {
       //get API from Laravel Backend
@@ -99,6 +119,22 @@ export default {
         .catch((error) => {
           console.log(error.response.data);
         });
+      axios
+        .get("http://localhost:8000/api/laporanKelas")
+        .then((response) => {
+          kelas.value = response.data.data;
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+      axios
+        .get("http://localhost:8000/api/laporanGym")
+        .then((response) => {
+          gyms.value = response.data.data;
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
     });
 
     function umumDelete(id) {
@@ -112,14 +148,177 @@ export default {
           console.log(error);
         });
     }
+
+    // function total(){
+
+    //   // let a = 0
+    //   // let totalmember = gyms.map((row) => row.count)
+    // }
+
+    function printGym() {
+      var printgym = window.open("", "PRINT", "height=800, width=600");
+      printgym.document.write(`<div id="element-to-convert">
+             <strong>GoFit</strong>
+              <p>Jl. CentralPark No. 10 Yogyakarta</p>
+              <p>
+                <strong><u>LAPORAN AKTIVITAS GYM Bulanan</u></strong><br>
+                <u>Bulan : Mei    Tahun : 2023</u> <br>
+              Tanggal cetak : 30 Mei 2023<br>
+              <table>
+                <thead>
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>Jumlah Member</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  ${this.gyms
+                    .map(
+                      (row) => `
+                        <tr>
+                            <td>${row.tanggal}</td>
+                            <td>${row.count}</td>
+                        </tr>
+                    `
+                    )
+                    .join("")}
+                      <tr>
+                        <td><strong>Total</strong></td>
+                        <td></td>
+                      </tr>
+                </tbody>
+              </table>
+              </div>
+              <style>
+              table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+              #element-to-convert {
+                box-sizing: border-box;
+                position: center;
+                width: 400px;
+                height: 320px;
+
+                background: #FFFFFF;
+                border: 1px solid #000000;
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 9px;
+              }
+
+              </style>`);
+      printgym.document.close();
+      printgym.print();
+      setTimeout(() => {
+        printgym.close();
+      }, 1000);
+    }
+
+    function printKelas() {
+      var printkelas = window.open("", "PRINT", "height=800, width=600");
+      printkelas.document.write(`<div id="element-to-convert">
+             <strong>GoFit</strong>
+              <p>Jl. CentralPark No. 10 Yogyakarta</p>
+              <p>
+                <strong><u>LAPORAN AKTIVITAS KELAS Bulanan</u></strong><br>
+                <u>Bulan : Mei    Tahun : 2023</u> <br>
+              Tanggal cetak : 30 Mei 2023<br>
+              <table>
+                <thead>
+                    <tr>
+                        <th>Kelas</th>
+                        <th>Instruktur</th>
+                        <th>Jumlah Peserta</th>
+                        <th>Jumlah Libur</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${this.kelas
+                      .map(
+                        (row) => `
+                        <tr>
+                            <td>${row.kelas}</td>
+                            <td>${row.instruktur}</td>
+                            <td>${row.jumlah_peserta_kelas}</td>
+                            <td>${row.jumlah_libur}</td>
+                        </tr>
+                    `
+                      )
+                      .join("")}
+                </tr>
+                </tbody>
+              </table>
+              </div>
+              <style>
+              table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+              #element-to-convert {
+                box-sizing: border-box;
+                position: center;
+                width: 620px;
+                height: 320px;
+
+                background: #FFFFFF;
+                border: 1px solid #000000;
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 9px;
+              }
+
+              </style>`);
+      printkelas.document.close();
+      printkelas.print();
+      setTimeout(() => {
+        printkelas.close();
+      }, 1000);
+    }
+
     //return
     return {
       kelast,
       instrukturs,
       umums,
       umumDelete,
+      gyms,
+      kelas,
+      // totalGym,
+      printGym,
+      printKelas,
     };
   },
 };
 </script>
-<style></style>
+<style>
+button {
+  margin-right: 10px;
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  color: #333;
+  background-color: #fff;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: "微软雅黑", arail;
+  cursor: pointer;
+}
+</style>

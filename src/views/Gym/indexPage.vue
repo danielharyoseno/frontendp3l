@@ -10,14 +10,14 @@
         <div class="col-md-12">
           <div class="card border-0 rounded shadow">
             <div class="card-body">
-              <h2 style="text-align: center">Booking Gym</h2>
+              <h2 style="text-align: center">Presensi Gym</h2>
               <table class="table table-striped table-bordered mt- 4">
                 <thead class="thead-dark">
                   <tr>
                     <th scope="col">No Booking</th>
                     <th scope="col">Nama</th>
                     <th scope="col">Sesi</th>
-                    <th scope="col">Tanggal Booking</th>
+                    <th scope="col">Tanggal Gym</th>
                     <th scope="col">Waktu Presensi</th>
                     <th scope="col">Status</th>
                     <th scope="col">Presensi</th>
@@ -104,7 +104,7 @@ export default {
         .put(`http://localhost:8000/api/bookingGym/${id}`)
         .then(() => {
           BookGyms.value.splice(BookGyms.value.indexOf(id), 1);
-          //   location.reload(true);
+          location.reload(true);
         })
         .catch((error) => {
           console.log(error);
@@ -113,9 +113,8 @@ export default {
 
     function printCard(BookGyms) {
       var printKartu = window.open("", "PRINT", "height=400, width=600");
-
       printKartu.document.write(`<div id="element-to-convert">
-              <strong>GoFit</strong>
+             <strong>GoFit</strong>
               <p>Jl. CentralPark No. 10 Yogyakarta</p>
               <br>
               <strong>STRUK PRESENSI GYM</strong>
@@ -125,21 +124,21 @@ export default {
               <p>Member: ${BookGyms.no_member} / ${BookGyms.nama}<br>
               Slot Waktu : ${BookGyms.slot}<br>
               </p>
-            </div>
-            <style>
-            #element-to-convert {
-              box-sizing: border-box;
-              position: center;
-              width: 300px;
-              height: 2225px;
+              </div>
+              <style>
+              #element-to-convert {
+                box-sizing: border-box;
+                position: center;
+                width: 300px;
+                height: 220px;
 
-              background: #FFFFFF;
-              border: 1px solid #000000;
-              box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-              border-radius: 9px;
-            }
+                background: #FFFFFF;
+                border: 1px solid #000000;
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 9px;
+              }
 
-            </style>`);
+              </style>`);
       printKartu.document.close();
       printKartu.print();
       setTimeout(() => {

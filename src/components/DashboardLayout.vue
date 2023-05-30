@@ -59,8 +59,20 @@
               >
             </li>
             <li class="nav-item">
-              <router-link :to="{ name: 'BookingGym.index' }" class="nav-link"
-                >Booking Gym</router-link
+              <router-link :to="{ name: 'PresensiGym.index' }" class="nav-link"
+                >Presensi Gym</router-link
+              >
+            </li>
+            <li class="nav-item">
+              <router-link
+                :to="{ name: 'PresensiKelas.index' }"
+                class="nav-link"
+                >Presensi Kelas</router-link
+              >
+            </li>
+            <li class="nav-item">
+              <router-link :to="{ name: 'LaporanKelas.index' }" class="nav-link"
+                >Laporan Kelas</router-link
               >
             </li>
           </ul>

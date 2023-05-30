@@ -84,9 +84,19 @@ const routes = [
         component: () => import("@/views/TransaksiAktivasi/createPage.vue"),
       },
       {
-        path: "/bookingGym",
-        name: "BookingGym.index",
+        path: "/presensiGym",
+        name: "PresensiGym.index",
         component: () => import("@/views/Gym/indexPage.vue"),
+      },
+      {
+        path: "/presensiKelas",
+        name: "PresensiKelas.index",
+        component: () => import("@/views/Kelas/indexPage.vue"),
+      },
+      {
+        path: "/laporanKelas",
+        name: "LaporanKelas.index",
+        component: () => import("@/views/Laporan/indexPage.vue"),
       },
     ],
   },

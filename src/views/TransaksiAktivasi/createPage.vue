@@ -57,6 +57,7 @@
       </div>
     </div>
   </main>
+  //pake vfor buat bikin struk//
   <div
     width="600px"
     id="printtarget"
