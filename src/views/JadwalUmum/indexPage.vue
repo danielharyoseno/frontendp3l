@@ -149,11 +149,9 @@ export default {
         });
     }
 
-    // function total(){
-
-    //   // let a = 0
-    //   // let totalmember = gyms.map((row) => row.count)
-    // }
+    function total() {
+      return gyms.value.reduce((total, row) => total + row.count, 0);
+    }
 
     function printGym() {
       var printgym = window.open("", "PRINT", "height=800, width=600");
@@ -184,7 +182,7 @@ export default {
                     .join("")}
                       <tr>
                         <td><strong>Total</strong></td>
-                        <td></td>
+                        <td>${total()}</td>
                       </tr>
                 </tbody>
               </table>

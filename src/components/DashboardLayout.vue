@@ -70,11 +70,6 @@
                 >Presensi Kelas</router-link
               >
             </li>
-            <li class="nav-item">
-              <router-link :to="{ name: 'LaporanKelas.index' }" class="nav-link"
-                >Laporan Kelas</router-link
-              >
-            </li>
           </ul>
         </div>
       </nav>
